@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './layouts/Layout';
-import Main from "./components/Main";
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
+import Main from "./pages/Main";
+import Login from "./pages/Login";
+import Logout from './components/Logout';
+import SignUp from "./pages/SignUp";
 import Temp from './components/Temp';
 import PrivateRoute from './components/PrivateRoute';
 
@@ -24,6 +25,7 @@ function App() {
           <Route>
             <Route path="/" element={<Main />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
             <Route path="/signup" element={<SignUp />} />
           </Route>
         </Routes>
