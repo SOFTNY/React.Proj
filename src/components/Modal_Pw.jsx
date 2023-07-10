@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import {Modal, Button, FloatingLabel, Form } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
 
 const Modal_Pw = ({show, onHide}) => {
       
@@ -71,14 +70,6 @@ const Modal_Pw = ({show, onHide}) => {
             }
           };
 
-    
-    // SearchPw 페이지로 이동하려면 경로를 수정하세요.
-    const navigate = useNavigate();
-
-    const handleClick = () => {
-      navigate('/search_pw');
-    };
-
   return (
     <Modal
       show = {show}
@@ -113,7 +104,7 @@ const Modal_Pw = ({show, onHide}) => {
         </FloatingLabel>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" type="button" onClick={handleClick} disabled={!email && !phone}>
+        <Button variant="primary" type="button" onClick={onChangePhone} disabled={!isEmail && !isPhone}>
           Click
         </Button>
         <Button onClick={onHide}>Close</Button>
