@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {Modal, Button, FloatingLabel, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const Modal_Id = ({show, onHide}) => {
       
@@ -11,6 +12,33 @@ const Modal_Id = ({show, onHide}) => {
 
       //유효성검사
       const [isPhone, setIsPhone] = useState(false);
+
+      //포넌트 호출
+      const navigate = useNavigate();
+
+
+      const handleSubmit = async (event) => {
+        try{
+          const response = await fetch('http://localhost:8080/member/exist',{
+            method: 'POST',
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify({phone}),
+          });
+          if(response.status == 404){
+            alert("이메일이 일치하지 않습니다.");
+          }
+          else if (response.ok) {
+            const data = await response.json();
+            const access = JSON.parse(JSON.stringify(data)).accessToken;
+            localStorage.setItem('accessToken', access);
+            window.location.href = "/";
+          }
+        }catch (error){
+          console.log(error);
+        }
+      };
+
+
 
       //폰 유효성검사
       const onChangePhone = async(e) => {
@@ -26,6 +54,16 @@ const Modal_Id = ({show, onHide}) => {
           setPhoneMessage('올바른 핸드폰 번호 형식입니다.');
           setIsPhone(true);
         }
+        return phoneRegex.test(phone);
+      };
+      
+
+      //유효성 검사에 통과하면 페이지O 그렇지 않으면 작동X
+      const validatePhone = () => {
+        if (!onChangePhone()) {//유효성검사에 맞지 않으면
+          return; //함수 종료
+        }
+        navigate(`/login`); //경로이동
       };
 
   return (
@@ -41,7 +79,7 @@ const Modal_Id = ({show, onHide}) => {
           아이디 찾기
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body onSubmit={handleSubmit}>
         <FloatingLabel
           controlId="floatingInput"
           label="휴대전화('-' 없이 번호만 입력해주세요)"
@@ -54,7 +92,7 @@ const Modal_Id = ({show, onHide}) => {
         </FloatingLabel>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" type="button">
+        <Button variant="primary" type="button" onClick={validatePhone} disabled={!phone && !validatePhone}>
           Click
         </Button>
         <Button onClick={onHide}>Close</Button>

@@ -24,7 +24,6 @@ const Header = () => {
             <Nav.Link href="#">Error</Nav.Link>
             <Nav.Link href="#">Communication</Nav.Link>
             <Nav.Link href="/temp">인증test</Nav.Link>
-            <Nav.Link href="/introduce">Introduce</Nav.Link>
           </Nav>
           <Nav>
             {accessToken ? (<Nav.Link href='/logout'>로그아웃</Nav.Link>) : (<><Nav.Link href="/login">로그인</Nav.Link>
