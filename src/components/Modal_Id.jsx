@@ -3,38 +3,40 @@ import { Modal, Button, FloatingLabel, Form } from 'react-bootstrap';
 
 const Modal_Id = ({ show, onHide }) => {
 
-  //휴대전화
+  //전달할 값
   const [phone, setPhone] = useState('');
+  const [name, setName] = useState('');
 
   //오류메세지 상태저장
   const [PhoneMessage, setPhoneMessage] = useState('');
+  const [nameMessage, setNameMessage] = useState('');
 
   //유효성검사
   const [isPhone, setIsPhone] = useState(false);
+  const [isName, setIsName] = useState(false);
 
-
+  
   const handleSubmit = async (event) => {
     try {
-      const response = await fetch('http://localhost:8080/member/exist', {
+      const response = await fetch('http://localhost:8080/findEmail', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone }),
+        body: JSON.stringify({ name, phone }),
       });
-      if (response.status == 404) {
-        alert("폰 번호가 일치하지 않습니다.");
+      if (response.ok) {
+        const result = await response.text();
+        if (result == '') {
+          alert('아이디가 존재하지 않습니다.');
+        }
+        else {
+          alert('email : ' + result);
+        }
       }
-      else if (response.ok) {
-        const data = await response.json();
-        const access = JSON.parse(JSON.stringify(data)).accessToken;
-        localStorage.setItem('accessToken', access);
-        window.location.href = "/";
-      }
+      
     } catch (error) {
       console.log(error);
     }
   };
-
-
 
   //폰 유효성검사
   const onChangePhone = async (e) => {
@@ -53,6 +55,21 @@ const Modal_Id = ({ show, onHide }) => {
     return phoneRegex.test(phone);
   };
 
+  //이름 유효성검사
+  const onChangeName = async(e) => {
+    e.preventDefault();
+    const nameConfirmCurrent = e.target.value;
+    setName(nameConfirmCurrent);
+    
+    if (e.target.value.length < 2 || e.target.value.length > 5) {
+    setNameMessage('2글자 이상 5글자 미만으로 입력해주세요.');
+    setIsName(false);
+    } else {
+        setNameMessage('올바른 이름 형식입니다.)');
+        setIsName(true);
+      }
+  };
+
 
   return (
     <Modal
@@ -68,19 +85,17 @@ const Modal_Id = ({ show, onHide }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body onSubmit={handleSubmit}>
-        <FloatingLabel
-          controlId="floatingInput"
-          label="휴대전화('-' 없이 번호만 입력해주세요)"
-          className="mb-3"
-        >
+        <FloatingLabel controlId="floatingPhone" label="휴대전화('-' 없이 번호만 입력해주세요)" className="mb-3">
           <Form.Control variant="standard" type="text" name="phone" value={phone} onClick={(e) => setPhone(e.target.value)} onChange={onChangePhone} />
-          {phone.length > 0 && (
-            <span className={`message ${isPhone ? 'success' : 'error'}`} style={{ color: isPhone ? 'blue' : 'red' }}> {PhoneMessage} </span>)}
-          <div>여기에 이메일 주소 보여주기</div>
+          {phone.length > 0 && (<span className={`message ${isPhone ? 'success' : 'error'}`} style={{ color: isPhone ? 'blue' : 'red' }}> {PhoneMessage} </span>)}
+        </FloatingLabel>
+        <FloatingLabel controlId="floatingName" label="이름" className="mb-3">
+          <Form.Control variant="standard" type="text" name="name" value={name} onClick={(e) => setName(e.target.value)} onChange={onChangeName} />
+          {name.length > 0 && (<span className={`message ${isName ? 'success' : 'error'}`} style={{ color: isName ? 'blue' : 'red' }}> {nameMessage} </span>)}
         </FloatingLabel>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" type="button" onClick={handleSubmit} disabled={!isPhone}>
+        <Button variant="primary" type="button" onClick={handleSubmit} disabled={!isPhone || !isName}>
           Click
         </Button>
         <Button onClick={onHide}>Close</Button>
