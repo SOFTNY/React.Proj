@@ -1,5 +1,7 @@
 .Table_Box{
-  flex: 4;
+  display: flex;
+  margin: 20px;
+  /* flex: 4; */
 }
 
 .titleList{
@@ -14,3 +16,7 @@
   object-fit: cover;
   margin-right: 10px;
 }
+
+/* .learnBtn{
+  width: 35px;
+} */

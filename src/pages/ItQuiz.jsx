@@ -1,16 +1,19 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
+
 import { DataGrid } from '@mui/x-data-grid';
-import { DeleteOutline } from '@mui/icons-material';
-import {Link} from 'react-router-dom'
-import { useHistory } from 'react-router-dom';
+
+// import ItQuiz_01 from '../ITQuiz/ItQuiz_01';
+// import { useNavigate } from 'react-router-dom';
 
 
 //css
 import '../css/ItQuiz.css';
 
+function ItQuiz() {
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
+  { field: 'id', headerName: 'No', width: 70 },
   { field: 'title', 
     headerName: 'Title', 
     width: 200,
@@ -25,115 +28,132 @@ const columns = [
   },
   { field: 'content', headerName: 'Content', width: 300 },
   {
-    // 짧은 글로 볼 수 있는 공부
+    // 짧은 글로 볼 수 있게 페이지 연결
     field: 'learn',
     headerName: 'Learn',
     width: 120,
-    renderLink: (params) => {
+    renderCell : (params) => {
+
       return (
-        <button className='startBtn' value={params.row.learn_title}>
-        </button>
-      );
+              <Link key={params.id} to={params.learn_link}>
+                <button className="startBtn">
+                {params.id}
+                {params.row.learn}
+                </button>
+              </Link>
+      )
     },
   },
   {
-    //시작 버튼
+    //퀴즈 시작 버튼
     field: 'start',
     headerName: 'Start',
     width: 120,
-    renderButton: (params) => {
+    renderCell : (params) => {
       return (
-        <button className='startBtn'>
-          Start
-        </button>
-      );
+          <button className="startBtn" onClick={params.row.start_link}>
+          {params.row.start}
+          </button>
+      )
     },
   }
 ];
 
 const rows = [
   { id: 1,
-    title: 'Snow',
-    title_img : 'https://jpassets.jobplanet.co.kr/production/uploads/material/media/4826/best_it_10.jpg',
-    content: 'Jon',
-    learn_title : 'Learn'
-  },
+    title: 'ITe Quiz 1',
+    title_img : 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FCitkU%2FbtsnIKs4R0u%2FodqSwsyzc0r8jMgadX2gCK%2Fimg.png',
+    content: 'ITe Quiz의 다양한 문제를 풀어보세요!',
+    learn : 'Learn',
+    learn_link: {id:1, learn_link: '/ItQuiz_01'},
+    start : 'Start',
+    // start_link:
+  },  
   
   { id: 2,
-    title: 'Lannister',
-    title_img : 'https://jpassets.jobplanet.co.kr/production/uploads/material/media/4826/best_it_10.jpg',
-    content: 'Cersei'
+    title: 'ITe Quiz 2',
+    title_img : 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fo4Y3Q%2FbtsnGZD2NgU%2FEIQaMXnXxXkj07z6LvjKS1%2Fimg.png',
+    content: 'ITe Quiz의 다양한 문제를 풀어보세요!',
+    learn : 'Learn',
+    // learn_link:
+    start : 'Start',
+    // start_link:
   },
   
   { id: 3, 
-    title: 'Lannister',
-    title_img : 'https://jpassets.jobplanet.co.kr/production/uploads/material/media/4826/best_it_10.jpg',
-    content: 'Jaime'
+    title: 'ITe Quiz 3',
+    title_img : 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FWgFUH%2FbtsnF7oPNc5%2FImneGxlwACvlf4wZd8NUO1%2Fimg.png',
+    content: 'ITe Quiz의 다양한 문제를 풀어보세요!',
+    learn : 'Learn',
+    // learn_link:
+    start : 'Start',
+    // start_link:
   },
   
   { id: 4, 
-    title: 'Stark',
-    title_img : 'https://jpassets.jobplanet.co.kr/production/uploads/material/media/4826/best_it_10.jpg', 
-    content: 'Arya'
+    title: 'ITe Quiz 4',
+    title_img : 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcCjvXK%2FbtsnEWIiXvd%2F036E9ZO1CrHnThkoyeQGek%2Fimg.png', 
+    content: 'ITe Quiz의 다양한 문제를 풀어보세요!',
+    learn : 'Learn',
+    // learn_link:
+    start : 'Start',
+    // start_link:
   },
   
   { 
     id: 5, 
-    title: 'Targaryen',
-    title_img : 'https://jpassets.jobplanet.co.kr/production/uploads/material/media/4826/best_it_10.jpg', 
-    content: 'Daenerys'
+    title: 'ITe Quiz 5',
+    title_img : 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FEO6zv%2FbtsnEMFK2Nt%2FnJubASqtRK5zdqVMortro0%2Fimg.png', 
+    content: 'ITe Quiz의 다양한 문제를 풀어보세요!',
+    learn : 'Learn',
+    // learn_link:
+    start : 'Start',
+    // start_link:
   },
   
   { id: 6,
-    title: 'Melisandre',
-    title_img : 'https://jpassets.jobplanet.co.kr/production/uploads/material/media/4826/best_it_10.jpg',
-    content: null
+    title: 'IT Trend',
+    title_img : 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F49s5K%2FbtsnFL0yw1C%2FQXAJFvjqBoUHwDhMOs1yTK%2Fimg.png',
+    content: '요즘 IT의 트렌드를 알아보세요!',
+    learn : 'Learn',
+    // learn_link:
+    start : 'Start',
+    // start_link:
   },
   
   { id: 7, 
-    title: 'Clifford',
-    title_img : 'https://jpassets.jobplanet.co.kr/production/uploads/material/media/4826/best_it_10.jpg', 
-    content: 'Ferrara'
+    title: 'C언어',
+    title_img : 'https://i.namu.wiki/i/KcqDuQYTxNpUcLIMZTg28QXse0XiWx1G7K68kYYCo1GuhoHmhB_V8Qe9odGGt0BH9-0nQZTN53WXTNpDmwVfWQ.svg', 
+    content: 'C언어에 대한 용어를 알아보도록 해요!',
+    learn : 'Learn',
+    // learn_link:
+    start : 'Start',
+    // start_link:
   },
   
   { id: 8,
-    title: 'Frances',
-    title_img : 'https://jpassets.jobplanet.co.kr/production/uploads/material/media/4826/best_it_10.jpg',
-    content: 'Rossini'
+    title: 'Python',
+    title_img : 'https://blog.kakaocdn.net/dn/bL8ETY/btrsc1dKdvU/PKl3b1kLTKsKuWAY9u2XT1/img.png',
+    content: '파이썬에 대한 용어를 알아보도록 해요!',
+    learn : 'Learn',
+    // learn_link:
+    start : 'Start',
+    // start_link:
   },
   
   { id: 9, 
-    title: 'Roxie',
-    title_img : 'https://jpassets.jobplanet.co.kr/production/uploads/material/media/4826/best_it_10.jpg',
-    content: 'Harvey'
+    title: 'Java',
+    title_img : 'https://i.namu.wiki/i/MuCO_ocla-FyadGnRZytkRLggQOcqxv_hXNjN7aYXDOPivIChJNdiRXp6vwSXbM6GcUL3pVTL-5U5TKQ0f1YhA.svg',
+    content: '자바에 대한 용어를 알아보도록 해요!',
+    learn : 'Learn',
+    // learn_link:
+    start : 'Start',
+    // start_link:
   },
 ];
 
 
 
-const handleButtonClick = async (event) => {
-  try{
-    const response = await fetch('http://localhost:8080/ItQuiz',{
-      method: 'POST',
-      headers: {'Content-Type' : 'application/json'},
-      body: JSON.stringify({}),
-    });
-    if(response.status == 404){
-      alert("해당 페이지를 찾을 수 없습니다.");
-    }
-    else if (response.ok) {
-      const data = await response.json();
-      const access = JSON.parse(JSON.stringify(data)).accessToken;
-      localStorage.setItem('accessToken', access);
-      window.location.href = "/";
-    }
-  }catch (error){
-    console.log(error);
-  }
-};
-
-
-export default function ItQuiz() {
   return (
     <div className='Table_Box'>
       <DataGrid
@@ -146,3 +166,5 @@ export default function ItQuiz() {
     </div>
   );
 }
+
+export default ItQuiz;
