@@ -1,0 +1,16 @@
+.Table_Box{
+  flex: 4;
+}
+
+.titleList{
+  display: flex;
+  align-items: center;
+}
+
+.titleListImg{
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
