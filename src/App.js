@@ -12,6 +12,8 @@ import Search_Pw from './components/Search_Pw';
 import ItQuiz from './pages/ItQuiz';
 import Error from './pages/Error';
 import Post from './pages/Post';
+import ItQuiz_01 from './ITQuiz_learn/ItQuiz_01';
+import Start_01 from './ITQuiz_start/Start_01';
 
 //react-responsive
 import { useMediaQuery } from 'react-responsive';
@@ -36,7 +38,11 @@ function App() {
           </Route>
           <Route>
             <Route path="/" element={<Main />} />
-            <Route path="/ItQuiz" element={<ItQuiz />} />
+            <Route path='/ItQuiz'>
+              <Route index element={<ItQuiz />} />
+              <Route path=":num" element={<ItQuiz_01 />} />
+              <Route path=":num" element={<Start_01 />} />
+            </Route>
             <Route path="/error" element={<Error />} />
             <Route path="/post" element={<Post />} />
             <Route path="/login" element={<Login />} />

@@ -1,11 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-
 import { DataGrid } from '@mui/x-data-grid';
-
-// import ItQuiz_01 from '../ITQuiz/ItQuiz_01';
-// import { useNavigate } from 'react-router-dom';
-
 
 //css
 import '../css/ItQuiz.css';
@@ -13,7 +8,7 @@ import '../css/ItQuiz.css';
 function ItQuiz() {
 
 const columns = [
-  { field: 'id', headerName: 'No', width: 70 },
+  { field: 'id', headerName: 'No', width: 90 },
   { field: 'title', 
     headerName: 'Title', 
     width: 200,
@@ -26,7 +21,7 @@ const columns = [
       )
     },
   },
-  { field: 'content', headerName: 'Content', width: 300 },
+  { field: 'content', headerName: 'Content', width: 325 },
   {
     // 짧은 글로 볼 수 있게 페이지 연결
     field: 'learn',
@@ -35,12 +30,11 @@ const columns = [
     renderCell : (params) => {
 
       return (
-              <Link key={params.id} to={params.learn_link}>
-                <button className="startBtn">
-                {params.id}
-                {params.row.learn}
-                </button>
-              </Link>
+          <Link key={params.id} to={'/ItQuiz/' + params.id}>
+            <button className="learnBtn">
+            {params.row.learn}
+            </button>
+          </Link>
       )
     },
   },
@@ -51,9 +45,11 @@ const columns = [
     width: 120,
     renderCell : (params) => {
       return (
-          <button className="startBtn" onClick={params.row.start_link}>
-          {params.row.start}
-          </button>
+            <Link key={params.id} to={'/ItQuiz/' + params.id}>
+              <button className="startBtn">
+              {params.row.start}
+              </button>
+            </Link>
       )
     },
   }
@@ -65,9 +61,7 @@ const rows = [
     title_img : 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FCitkU%2FbtsnIKs4R0u%2FodqSwsyzc0r8jMgadX2gCK%2Fimg.png',
     content: 'ITe Quiz의 다양한 문제를 풀어보세요!',
     learn : 'Learn',
-    learn_link: {id:1, learn_link: '/ItQuiz_01'},
-    start : 'Start',
-    // start_link:
+    start : 'Start'
   },  
   
   { id: 2,
@@ -75,9 +69,7 @@ const rows = [
     title_img : 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fo4Y3Q%2FbtsnGZD2NgU%2FEIQaMXnXxXkj07z6LvjKS1%2Fimg.png',
     content: 'ITe Quiz의 다양한 문제를 풀어보세요!',
     learn : 'Learn',
-    // learn_link:
-    start : 'Start',
-    // start_link:
+    start : 'Start'
   },
   
   { id: 3, 
@@ -85,9 +77,7 @@ const rows = [
     title_img : 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FWgFUH%2FbtsnF7oPNc5%2FImneGxlwACvlf4wZd8NUO1%2Fimg.png',
     content: 'ITe Quiz의 다양한 문제를 풀어보세요!',
     learn : 'Learn',
-    // learn_link:
-    start : 'Start',
-    // start_link:
+    start : 'Start'
   },
   
   { id: 4, 
@@ -95,9 +85,7 @@ const rows = [
     title_img : 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcCjvXK%2FbtsnEWIiXvd%2F036E9ZO1CrHnThkoyeQGek%2Fimg.png', 
     content: 'ITe Quiz의 다양한 문제를 풀어보세요!',
     learn : 'Learn',
-    // learn_link:
-    start : 'Start',
-    // start_link:
+    start : 'Start'
   },
   
   { 
@@ -106,9 +94,7 @@ const rows = [
     title_img : 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FEO6zv%2FbtsnEMFK2Nt%2FnJubASqtRK5zdqVMortro0%2Fimg.png', 
     content: 'ITe Quiz의 다양한 문제를 풀어보세요!',
     learn : 'Learn',
-    // learn_link:
-    start : 'Start',
-    // start_link:
+    start : 'Start'
   },
   
   { id: 6,
@@ -116,9 +102,7 @@ const rows = [
     title_img : 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F49s5K%2FbtsnFL0yw1C%2FQXAJFvjqBoUHwDhMOs1yTK%2Fimg.png',
     content: '요즘 IT의 트렌드를 알아보세요!',
     learn : 'Learn',
-    // learn_link:
-    start : 'Start',
-    // start_link:
+    start : 'Start'
   },
   
   { id: 7, 
@@ -126,9 +110,7 @@ const rows = [
     title_img : 'https://i.namu.wiki/i/KcqDuQYTxNpUcLIMZTg28QXse0XiWx1G7K68kYYCo1GuhoHmhB_V8Qe9odGGt0BH9-0nQZTN53WXTNpDmwVfWQ.svg', 
     content: 'C언어에 대한 용어를 알아보도록 해요!',
     learn : 'Learn',
-    // learn_link:
-    start : 'Start',
-    // start_link:
+    start : 'Start'
   },
   
   { id: 8,
@@ -136,9 +118,7 @@ const rows = [
     title_img : 'https://blog.kakaocdn.net/dn/bL8ETY/btrsc1dKdvU/PKl3b1kLTKsKuWAY9u2XT1/img.png',
     content: '파이썬에 대한 용어를 알아보도록 해요!',
     learn : 'Learn',
-    // learn_link:
-    start : 'Start',
-    // start_link:
+    start : 'Start'
   },
   
   { id: 9, 
@@ -146,9 +126,7 @@ const rows = [
     title_img : 'https://i.namu.wiki/i/MuCO_ocla-FyadGnRZytkRLggQOcqxv_hXNjN7aYXDOPivIChJNdiRXp6vwSXbM6GcUL3pVTL-5U5TKQ0f1YhA.svg',
     content: '자바에 대한 용어를 알아보도록 해요!',
     learn : 'Learn',
-    // learn_link:
-    start : 'Start',
-    // start_link:
+    start : 'Start'
   },
 ];
 

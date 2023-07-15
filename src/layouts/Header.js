@@ -10,6 +10,9 @@ import {
 //Bootstrap css
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+//css
+import '../css/Header.css';
+
 const Header = () => {
   const accessToken = localStorage.getItem('accessToken');
 
