@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import { ItQuizData01 } from './Data/ItQuizData01';
 import ItQuizResult from './Data/ItQuizResult';
 import '../css/ItQuiz-style.css';
 
@@ -11,10 +10,31 @@ function ItQuiz_01() {
   const [score,setScore] = useState(0);
   const [clickedOption,setClickedOption]=useState(0);
   const [showResult,setShowResult]=useState(false);
+
+  const [quizList, setQuizList] = useState([]);
+
+  // DB에서 퀴즈 목록 로드
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/quizList/' + num, {
+          method: 'GET'
+        });
+        if (response.ok) {
+          const result = await response.json();
+          setQuizList(result);
+        }
+        
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    loadData();
+  },[]);
   
   const changeQuestion = ()=>{
       updateScore();
-      if(currentQuestion< ItQuizData01.length-1){
+      if(currentQuestion< quizList.length-1){
           setCurrentQuestion(currentQuestion+1);
           setClickedOption(0);
       }else{
@@ -22,7 +42,7 @@ function ItQuiz_01() {
       }
   }
   const updateScore=()=>{
-      if(clickedOption===ItQuizData01[currentQuestion].answer){
+      if(clickedOption===quizList[currentQuestion].answer){
           setScore(score+1);
       }
   }
@@ -34,38 +54,34 @@ function ItQuiz_01() {
   }
 
   return (
-    <div>{num}
-        <div className="heading-img">
+    <div>
+      {quizList.length > 0 ? ( // quizList가 비어있지 않을 때 렌더링
+        <div>
+          <div className="heading-img">
           <img src="https://31.media.tumblr.com/f4052ec68516abe096317253967e9cd5/tumblr_inline_msvvrdr0xZ1qz4rgp.gif" alt="" />
         </div>
         <div className="container">
             {showResult ? (
-                <ItQuizResult score={score} totalScore={ItQuizData01.length} tryAgain={resetAll}/>
+                <ItQuizResult score={score} totalScore={quizList.length} tryAgain={resetAll}/>
             ):(
             <>
             <div className="question">
                 <span id="question-number">{currentQuestion+1}. </span>
-                <span id="question-txt">{ItQuizData01[currentQuestion].question}</span>
+                <span id="question-txt">{quizList[currentQuestion].question}</span>
             </div>
             <div className="option-container">
-                {ItQuizData01[currentQuestion].options.map((option,i)=>{
-                    return(
-                        <button 
-                        // className="option-btn"
-                        className={`option-btn ${
-                            clickedOption == i+1?"checked":null
-                        }`}
-                        key={i}
-                        onClick={()=>setClickedOption(i+1)}
-                        >
-                        {option}
-                        </button>
-                    )
-                })}                
+                <button className={`option-btn ${clickedOption == 1?"checked":null}`} key={1} onClick={()=>setClickedOption(1)}>1. {quizList[currentQuestion].option1}</button>
+                <button className={`option-btn ${clickedOption == 2?"checked":null}`} key={2} onClick={()=>setClickedOption(2)}>2. {quizList[currentQuestion].option2}</button>
+                <button className={`option-btn ${clickedOption == 3?"checked":null}`} key={3} onClick={()=>setClickedOption(3)}>3. {quizList[currentQuestion].option3}</button>
+                <button className={`option-btn ${clickedOption == 4?"checked":null}`} key={4} onClick={()=>setClickedOption(4)}>4. {quizList[currentQuestion].option4}</button>       
             </div>
             <input type="button" value="Next" id="next-button" onClick={changeQuestion}/>
             </>)}
         </div>
+        </div>
+      ) : (
+        <div>Loading...</div> // 데이터가 불러와질 때까지 로딩 메시지를 보여줌
+      )}
     </div>
   );
 }
