@@ -73,7 +73,16 @@ function ItQuiz() {
   ];
 
   return (
-    <div></div>
+    <div className='Table_Box'>
+      <DataGrid
+        rows={quizList}
+        columns={columns}
+        disableRowSelectionOnClick
+        getRowId={(row) => row.idx}
+        pageSize={5}
+        rowPerPageOptions={[5]}
+      />
+    </div>
   );
 }
 
