@@ -1,10 +1,13 @@
+import React from 'react'
+
+
+
 function Post(){
-
-
-  return(
-    <>
-    게시판
-    </>
+  
+  return (
+    <div>
+      게시판
+    </div>
   )
 }
 
