@@ -1,20 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Single+Day&display=swap');
 
 body{
-  margin: 0px;
+  margin-top: 80px;
   padding: 0px;
+  padding-top: 0px;
   box-sizing: border-box;
-}
-
-.bg-color{
   font-family: 'Black Han Sans', sans-serif;
   font-family: 'Nanum Gothic', sans-serif;
   font-family: 'Noto Sans KR', sans-serif;
   font-family: 'Single Day', cursive;
+}
+
+
+.bg-color{
   background: linear-gradient(rgb(27, 0, 49), rgb(99, 99, 215), rgb(253, 193, 203));
   width: 100%;
 }
-
 
 .page_txt05{
   display: flex;

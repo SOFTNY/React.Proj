@@ -1,22 +1,29 @@
-.error_box{
-  margin-top: 100px;
+.search{
+  float: left;
+  width: 50%;
+  padding: 5px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 1px solid #eee;
 }
 
-.search{
+.write{
+  float: right;
+  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 5px;
-  font-size: 20px;
+  border: none;
   border-radius: 5px;
 }
 
-.list{
-  padding: 0;
-  list-style: none;
-  text-align: center;
+.pagination{
+  display: flex;
+  justify-content: center;
 }
 
-.listItem{
-  margin-bottom: 20px;
-  font-size: 25px;
-  color: #444;
-  font-weight: 300;
+.SearchBtn{
+  display: flex;
+  justify-content: center;
 }

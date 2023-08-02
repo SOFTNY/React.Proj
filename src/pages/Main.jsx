@@ -119,7 +119,7 @@ function Main() {
       {/* Card */}
         <Row>
           <Col sm={4}>
-            <Card Card style={{ width: '100%', height: '305px'}}>
+            <Card Card style={{ width: '100%', height: '320px'}}>
               <Card.Img variant="top" src="https://media2.giphy.com/media/cM1YT07nEkoU7nt6PJ/giphy.gif?cid=ecf05e47glyjb8t91uqhwabs1pcisu65ujby9c9bf30e3f6d&ep=v1_gifs_search&rid=giphy.gif&ct=g"/>
               <Card.Body>
               <Card.Title>ItQuiz</Card.Title>
@@ -132,27 +132,27 @@ function Main() {
           </Col>
 
           <Col sm={4}>
-            <Card style={{  width: '100%', height: '305px' }}>
+            <Card style={{  width: '100%', height: '320px' }}>
               <Card.Img variant="top" src="https://media0.giphy.com/media/RbDKaczqWovIugyJmW/giphy.gif?cid=ecf05e47riid8vp16xp83zddua3o6x7j6sw5vqu2k9bxz1u6&ep=v1_gifs_related&rid=giphy.gif&ct=g" />
               <Card.Body>
               <Card.Title>Error</Card.Title>
               <Card.Text>
               If you encounter an error, solve it with your colleagues!
               </Card.Text>
-              <Button className='btn' onClick={ErrorPage}>Click</Button>
+              <Button className='main-btn' onClick={ErrorPage}>Click</Button>
               </Card.Body>
             </Card>
           </Col>
 
           <Col sm={4}>
-            <Card style={{  width: '100%', height: '305px' }}>
+            <Card style={{  width: '100%', height: '320px' }}>
               <Card.Img variant="top" src="https://media3.giphy.com/media/xTiTnxpQ3ghPiB2Hp6/giphy.gif?cid=ecf05e4707mlgehm3zopz2fz6w68uv5hdzhoc9uryaupq47s&ep=v1_gifs_search&rid=giphy.gif&ct=g"/>
               <Card.Body>
               <Card.Title>Post</Card.Title>
               <Card.Text>
               Communicate with colleagues, share good information!
               </Card.Text>
-              <Button className='btn' onClick={PostPage}>Click</Button>
+              <Button className='main-btn' onClick={PostPage}>Click</Button>
               </Card.Body>
             </Card>
           </Col>

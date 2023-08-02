@@ -45,7 +45,9 @@ const PostEditor = () => {
 
   return (
     <div className='postEditor-div'>
-      <TextField fullWidth label="제목" variant="standard" type="title" name="title" onChange={(e) => setTitle(e.target.value)} />
+      <div style={{display:'flex', justifyContent:'center'}}>
+        <TextField style={{width:'500px'}} label="제목" variant="standard" type="title" name="title" onChange={(e) => setTitle(e.target.value)} />
+      </div>
       <Editor
         // 에디터와 툴바 모두에 적용되는 클래스
         wrapperClassName="wrapper-class"
@@ -74,7 +76,10 @@ const PostEditor = () => {
         // 에디터의 값이 변경될 때마다 onEditorStateChange 호출
         onEditorStateChange={onEditorStateChange}
       />
-      <button onClick={btn_post}>post</button>
+      <div style={{display:'flex', justifyContent:'center'}}>
+        <button style={{width:'120px' , padding: '10px', border: 'none', borderRadius:'5px', marginBottom:'20px' }} onClick={btn_post}>post</button>
+      </div>
+
     </div>
   );
 };
